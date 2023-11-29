@@ -64,10 +64,7 @@ public class NfcReaderActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setTitle(R.string.activity_nfc_title);
 
-//        setContentView(R.layout.activity_nfc_check);
         initComponents();
 
         mHandler = new Handler();
@@ -226,7 +223,7 @@ public class NfcReaderActivity extends Activity {
                 String birthDate = sessionScanInfo.get_birthDate();
                 String expirationDate = sessionScanInfo.get_expirationDate();
 
-                mCardResult = rd.readData(isoDep, cccdId, birthDate, expirationDate);
+                mCardResult = (CardResult) rd.readData(isoDep, cccdId, true, true,true);
                 CardResult result = mCardResult;
                 if (result != null && (result.getCode() == ResultCode.SUCCESS || result.getCode() == ResultCode.SUCCESS_WITH_WARNING)) {
                     citizenInfo = rd.parseCardDetail(result);

@@ -23,7 +23,7 @@ public class ClientScanInfo {
     }
 
     public static volatile ClientScanInfo INSTANCE = null;
-    private SessionScanInfo(){}
+    private ClientScanInfo(){}
     public static ClientScanInfo getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new ClientScanInfo();

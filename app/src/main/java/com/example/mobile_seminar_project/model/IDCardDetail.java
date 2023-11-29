@@ -11,22 +11,18 @@ public class IDCardDetail {
     private String fullName;
     private String gender;
     private String homeTown;
-    private String husBandName;
     private String identifyCharacteristics;
     private String motherName;
     private String nationality;
-    private String oldIdentify;
     private String outOfDate;
     private Bitmap photo;
-    private String photoBase64;
     private String regPlaceAddress;
     private String religion;
-    private String wifeName;
 
     public IDCardDetail() {
     }
 
-    public IDCardDetail(String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10, String str11, String str12, String str13, String str14, String str15, String str16, String str17, String str18, Bitmap bitmap) {
+    public IDCardDetail(String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10, String str11, String str12, String str13, String str14, Bitmap bitmap) {
         this.citizenPid = str;
         this.fullName = str2;
         this.birthDate = str3;
@@ -41,10 +37,6 @@ public class IDCardDetail {
         this.outOfDate = str12;
         this.fatherName = str13;
         this.motherName = str14;
-        this.wifeName = str15;
-        this.husBandName = str16;
-        this.oldIdentify = str17;
-        this.photoBase64 = str18;
         this.photo = bitmap;
     }
 
@@ -170,38 +162,6 @@ public class IDCardDetail {
 
     public final void setMotherName(String str) {
         this.motherName = str;
-    }
-
-    public final String getWifeName() {
-        return this.wifeName;
-    }
-
-    public final void setWifeName(String str) {
-        this.wifeName = str;
-    }
-
-    public final String getHusBandName() {
-        return this.husBandName;
-    }
-
-    public final void setHusBandName(String str) {
-        this.husBandName = str;
-    }
-
-    public final String getOldIdentify() {
-        return this.oldIdentify;
-    }
-
-    public final void setOldIdentify(String str) {
-        this.oldIdentify = str;
-    }
-
-    public final String getPhotoBase64() {
-        return this.photoBase64;
-    }
-
-    public final void setPhotoBase64(String str) {
-        this.photoBase64 = str;
     }
 
     public final Bitmap getPhoto() {
