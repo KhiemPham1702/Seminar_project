@@ -1,8 +1,8 @@
-import 'controller/nfc_instruction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:khim_s_application8/core/app_export.dart';
-import 'package:khim_s_application8/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:khim_s_application8/widgets/app_bar/custom_app_bar.dart';
+
+import 'controller/nfc_instruction_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
@@ -50,18 +50,23 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
                   style: theme.textTheme.bodyLarge,
                 ),
               ),
-              Spacer(
-                flex: 34,
+              // Spacer(
+              //   flex: 34,
+              // ),
+              Container(
+                child: Image.asset('assets/images/nfc_check.gif'),
+                height: 400,
+                width: 400,
               ),
-              CustomImageView(
-                imagePath: ImageConstant.imgMingcuteRightLine,
-                height: 35.adaptSize,
-                width: 35.adaptSize,
-                alignment: Alignment.centerRight,
-              ),
-              Spacer(
-                flex: 34,
-              ),
+              // CustomImageView(
+              //   imagePath: ImageConstant.imgMingcuteRightLine,
+              //   height: 35.adaptSize,
+              //   width: 35.adaptSize,
+              //   alignment: Alignment.centerRight,
+              // ),
+              // Spacer(
+              //   flex: 34,
+              // ),
               Container(
                 width: 366.h,
                 margin: EdgeInsets.symmetric(horizontal: 17.h),
@@ -73,12 +78,12 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
                   style: theme.textTheme.bodyLarge,
                 ),
               ),
-              SizedBox(height: 19.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgGroup1,
-                height: 18.v,
-                width: 61.h,
-              ),
+              // SizedBox(height: 19.v),
+              // CustomImageView(
+              //   imagePath: ImageConstant.imgGroup1,
+              //   height: 18.v,
+              //   width: 61.h,
+              // ),
               Spacer(
                 flex: 30,
               ),
@@ -110,15 +115,15 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
           textAlign: TextAlign.left,
         ),
       ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgVector,
-          margin: EdgeInsets.symmetric(
-            horizontal: 24.h,
-            vertical: 25.v,
-          ),
-        ),
-      ],
+      // actions: [
+      //   AppbarTrailingImage(
+      //     imagePath: ImageConstant.imgVector,
+      //     margin: EdgeInsets.symmetric(
+      //       horizontal: 24.h,
+      //       vertical: 25.v,
+      //     ),
+      //   ),
+      // ],
       styleType: Style.bgOutline,
     );
   }

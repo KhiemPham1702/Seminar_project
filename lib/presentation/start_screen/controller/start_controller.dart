@@ -9,11 +9,5 @@ class StartController extends GetxController {
   Rx<StartModel> startModelObj = StartModel().obs;
 
   @override
-  void onReady() {
-    Future.delayed(const Duration(milliseconds: 3000), () {
-      Get.offNamed(
-        AppRoutes.mrzIntroScreen,
-      );
-    });
-  }
+  void onReady() {}
 }

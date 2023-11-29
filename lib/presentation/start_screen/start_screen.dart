@@ -1,9 +1,9 @@
-import 'controller/start_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:khim_s_application8/core/app_export.dart';
-import 'package:khim_s_application8/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:khim_s_application8/widgets/app_bar/custom_app_bar.dart';
 import 'package:khim_s_application8/widgets/custom_elevated_button.dart';
+
+import 'controller/start_controller.dart';
 
 class StartScreen extends GetWidget<StartController> {
   const StartScreen({Key? key}) : super(key: key);
@@ -66,11 +66,11 @@ class StartScreen extends GetWidget<StartController> {
                       style: CustomTextStyles.displayMediumYellow200)
                 ]),
                 textAlign: TextAlign.left)),
-        actions: [
-          AppbarTrailingImage(
-              imagePath: ImageConstant.imgVector,
-              margin: EdgeInsets.symmetric(horizontal: 24.h, vertical: 25.v))
-        ],
+        // actions: [
+        //   AppbarTrailingImage(
+        //       imagePath: ImageConstant.imgVector,
+        //       margin: EdgeInsets.symmetric(horizontal: 24.h, vertical: 25.v))
+        // ],
         styleType: Style.bgOutline);
   }
 

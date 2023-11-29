@@ -1,9 +1,9 @@
-import 'controller/nfc_intro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:khim_s_application8/core/app_export.dart';
-import 'package:khim_s_application8/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:khim_s_application8/widgets/app_bar/custom_app_bar.dart';
 import 'package:khim_s_application8/widgets/custom_elevated_button.dart';
+
+import 'controller/nfc_intro_controller.dart';
 
 class NfcIntroScreen extends GetWidget<NfcIntroController> {
   const NfcIntroScreen({Key? key}) : super(key: key);
@@ -35,6 +35,11 @@ class NfcIntroScreen extends GetWidget<NfcIntroController> {
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
                           style: theme.textTheme.bodyLarge)),
+                  Container(
+                    child: Image.asset('assets/images/nfc_pass.gif'),
+                    height: 400,
+                    width: 400,
+                  ),
                   Spacer(),
                   CustomElevatedButton(
                       text: "lbl_next".tr,
@@ -72,11 +77,11 @@ class NfcIntroScreen extends GetWidget<NfcIntroController> {
                       style: CustomTextStyles.displayMediumYellow200)
                 ]),
                 textAlign: TextAlign.left)),
-        actions: [
-          AppbarTrailingImage(
-              imagePath: ImageConstant.imgVector,
-              margin: EdgeInsets.symmetric(horizontal: 24.h, vertical: 25.v))
-        ],
+        // actions: [
+        //   AppbarTrailingImage(
+        //       imagePath: ImageConstant.imgVector,
+        //       margin: EdgeInsets.symmetric(horizontal: 24.h, vertical: 25.v))
+        // ],
         styleType: Style.bgOutline);
   }
 
