@@ -202,7 +202,7 @@ public class NfcReaderActivity extends Activity {
             nfcCheckCallback = checkCallback;
         }
 
-        private IDCardDetail citizenInfo = new IDCardDetail();
+        private com.htc.sdk.model.IDCardDetail citizenInfo = new com.htc.sdk.model.IDCardDetail();
         CardResult mCardResult;
 
         @Override

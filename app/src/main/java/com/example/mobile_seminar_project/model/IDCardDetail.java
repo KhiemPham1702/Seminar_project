@@ -11,18 +11,30 @@ public class IDCardDetail {
     private String fullName;
     private String gender;
     private String homeTown;
+    private String husBandName;
     private String identifyCharacteristics;
     private String motherName;
     private String nationality;
+    private String oldIdentify;
     private String outOfDate;
     private Bitmap photo;
+    private String photoBase64;
     private String regPlaceAddress;
     private String religion;
+    private String wifeName;
+    private boolean chipAuth = false;
+    private String chipAuthMessage = "";
+    private boolean cscaAuth = false;
+    private String cscaAuthMessage = "";
+    private String sodBase64 = "";
+
 
     public IDCardDetail() {
     }
 
-    public IDCardDetail(String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10, String str11, String str12, String str13, String str14, Bitmap bitmap) {
+    public IDCardDetail(String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10, String str11, String str12, String str13, String str14, String str15, String str16, String str17, String str18, Bitmap bitmap) {
+        String str19 = str13;
+
         this.citizenPid = str;
         this.fullName = str2;
         this.birthDate = str3;
@@ -35,21 +47,28 @@ public class IDCardDetail {
         this.identifyCharacteristics = str10;
         this.dateProvide = str11;
         this.outOfDate = str12;
-        this.fatherName = str13;
+        this.fatherName = str19;
         this.motherName = str14;
+        this.wifeName = str15;
+        this.husBandName = str16;
+        this.oldIdentify = str17;
+        this.photoBase64 = str18;
         this.photo = bitmap;
     }
 
     public boolean isValid() {
-        if (this.citizenPid != null && this.citizenPid.length() == 12) {
-            if (this.birthDate != null && this.birthDate.length() == 10) {
-                return this.outOfDate != null && this.outOfDate.length() == 10;
-            } else {
-                return false;
-            }
-        } else {
+        if (this.citizenPid == null || this.citizenPid.length() != 12) {
             return false;
         }
+
+        if (this.birthDate == null || this.birthDate.length() != 10) {
+            return false;
+        }
+
+        if (this.outOfDate == null || this.outOfDate.length() != 10) {
+            return false;
+        }
+        return true;
     }
 
     public final String getCitizenPid() {
@@ -152,6 +171,7 @@ public class IDCardDetail {
         return this.fatherName;
     }
 
+
     public final void setFatherName(String str) {
         this.fatherName = str;
     }
@@ -164,6 +184,38 @@ public class IDCardDetail {
         this.motherName = str;
     }
 
+    public final String getWifeName() {
+        return this.wifeName;
+    }
+
+    public final void setWifeName(String str) {
+        this.wifeName = str;
+    }
+
+    public final String getHusBandName() {
+        return this.husBandName;
+    }
+
+    public final void setHusBandName(String str) {
+        this.husBandName = str;
+    }
+
+    public final String getOldIdentify() {
+        return this.oldIdentify;
+    }
+
+    public final void setOldIdentify(String str) {
+        this.oldIdentify = str;
+    }
+
+    public final String getPhotoBase64() {
+        return this.photoBase64;
+    }
+
+    public final void setPhotoBase64(String str) {
+        this.photoBase64 = str;
+    }
+
     public final Bitmap getPhoto() {
         return this.photo;
     }
@@ -171,5 +223,44 @@ public class IDCardDetail {
     public final void setPhoto(Bitmap bitmap) {
         this.photo = bitmap;
     }
-}
 
+    public final boolean getChipAuth() {
+        return this.chipAuth;
+    }
+
+    public final void setChipAuth(boolean b) {
+        this.chipAuth = b;
+    }
+
+    public final String getChipAuthMessage() {
+        return this.chipAuthMessage;
+    }
+
+    public final void setChipAuthMessage(String ms) {
+        this.chipAuthMessage = ms;
+    }
+
+    public final boolean getCscaAuth() {
+        return this.cscaAuth;
+    }
+
+    public final void setCscaAuth(boolean b) {
+        this.cscaAuth = b;
+    }
+
+    public final String getCscaAuthMessage() {
+        return this.cscaAuthMessage;
+    }
+
+    public final void setCscaAuthMessage(String msg) {
+        this.cscaAuthMessage = msg;
+    }
+
+    public final String getSodBase64() {
+        return this.sodBase64;
+    }
+
+    public final void setSodBase64(String msg) {
+        this.sodBase64 = msg;
+    }
+}
