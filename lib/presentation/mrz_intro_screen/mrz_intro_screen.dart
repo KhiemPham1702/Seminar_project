@@ -59,11 +59,6 @@ class MrzIntroScreen extends GetWidget<MrzIntroController> {
                       style: CustomTextStyles.displayMediumYellow200)
                 ]),
                 textAlign: TextAlign.left)),
-        // actions: [
-        //   AppbarTrailingImage(
-        //       imagePath: ImageConstant.imgVector,
-        //       margin: EdgeInsets.symmetric(horizontal: 24.h, vertical: 25.v))
-        // ],
         styleType: Style.bgOutline);
   }
 
@@ -79,8 +74,6 @@ class MrzIntroScreen extends GetWidget<MrzIntroController> {
 
   /// Navigates to the nfcIntroScreen when the action is triggered.
   onTapNext() {
-    Get.toNamed(
-      AppRoutes.nfcIntroScreen,
-    );
+    Get.toNamed(AppRoutes.cameraScreen);
   }
 }

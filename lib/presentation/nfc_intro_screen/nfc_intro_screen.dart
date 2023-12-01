@@ -10,6 +10,8 @@ class NfcIntroScreen extends GetWidget<NfcIntroController> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic>? data = Get.arguments;
+    controller.result = data;
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
@@ -77,18 +79,14 @@ class NfcIntroScreen extends GetWidget<NfcIntroController> {
                       style: CustomTextStyles.displayMediumYellow200)
                 ]),
                 textAlign: TextAlign.left)),
-        // actions: [
-        //   AppbarTrailingImage(
-        //       imagePath: ImageConstant.imgVector,
-        //       margin: EdgeInsets.symmetric(horizontal: 24.h, vertical: 25.v))
-        // ],
         styleType: Style.bgOutline);
   }
 
   /// Navigates to the nfcInstructionScreen when the action is triggered.
   onTapNext() {
-    Get.toNamed(
-      AppRoutes.nfcInstructionScreen,
-    );
+    // Get.toNamed(
+    //   AppRoutes.nfcInstructionScreen,
+    // );
+    controller.dataRe();
   }
 }

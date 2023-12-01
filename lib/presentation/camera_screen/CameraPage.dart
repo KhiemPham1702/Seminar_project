@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mrz_scanner/flutter_mrz_scanner.dart';
+import 'package:khim_s_application8/core/app_export.dart';
 
 class CameraPage extends StatefulWidget {
   @override
@@ -20,8 +21,7 @@ class _CameraPageState extends State<CameraPage> {
           onControllerCreated: onControllerCreated,
         ),
         Positioned(
-            top: MediaQuery.of(context).size.height *
-                0.25, // Khoảng cách từ bottom
+            top: MediaQuery.of(context).size.height * 0.25,
             child: Text('Scan back of document',
                 style: TextStyle(
                   fontFamily: 'Quicksand-SemiBold',
@@ -30,7 +30,7 @@ class _CameraPageState extends State<CameraPage> {
                   fontWeight: FontWeight.w600,
                 ))),
         Positioned(
-            top: MediaQuery.of(context).size.height * 0.52,
+            top: MediaQuery.of(context).size.height * 0.55,
             child: Transform.scale(
               scaleX: MediaQuery.of(context).size.width / 20.0,
               scaleY: MediaQuery.of(context).size.height / 210.0,
@@ -46,10 +46,8 @@ class _CameraPageState extends State<CameraPage> {
               ),
             )),
         Positioned(
-          bottom: MediaQuery.of(context).size.height *
-              0.03, // Khoảng cách từ bottom
-          right:
-              MediaQuery.of(context).size.height * 0.03, // Khoảng cách từ right
+          bottom: MediaQuery.of(context).size.height * 0.03,
+          right: MediaQuery.of(context).size.height * 0.03,
           child: IconButton(
             icon: Icon(
               isFlashlightOn ? Icons.flashlight_on : Icons.flashlight_off,
@@ -64,17 +62,6 @@ class _CameraPageState extends State<CameraPage> {
               setState(() {
                 isFlashlightOn = !isFlashlightOn;
               });
-            },
-          ),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height * 0.03,
-          left: MediaQuery.of(context).size.height * 0.03,
-          child: IconButton(
-            icon: Icon(Icons.keyboard),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.pop(context);
             },
           ),
         ),
@@ -96,13 +83,18 @@ class _CameraPageState extends State<CameraPage> {
       }
       isParsed = true;
       Map<String, dynamic>? re = {
-        'Birthdate': result.birthDate,
-        'Expiry date': result.expiryDate,
+        'Birthdate': result.birthDate.toString(),
+        'Expiry date': result.expiryDate.toString(),
         'ID': result.personalNumber,
       };
-      Navigator.pop(context, re);
+
+      controller?.stopPreview();
+
+      Get.toNamed(
+        AppRoutes.nfcIntroScreen,
+        arguments: re,
+      );
     };
-    controller.onError = (error) => print(error);
 
     controller.startPreview();
   }

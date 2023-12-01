@@ -42,6 +42,14 @@ class NfcIntroController extends GetxController {
     }
   }
 
+  Future<void> dataRe() async {
+    print(
+        "DATA=========================${convertToYYMMDD(result?['Birthdate'])}");
+    print(
+        "DATA=========================${convertToYYMMDD(result?['Expiry date'])}");
+    print("DATA=========================${convertToCCCDFormat(result?['ID'])}");
+  }
+
   // Future<void> _scanMRZ() async {
   //   if (_permissionStatus == PermissionStatus.granted) {
   //     result = await Navigator.push<Map<String, dynamic>>(
