@@ -1,0 +1,68 @@
+group 'com.example.nfc_plugin'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.example.nfc_plugin'
+    }
+
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 26
+    }
+
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+        testImplementation 'org.mockito:mockito-core:5.0.0'
+        implementation 'androidx.appcompat:appcompat:1.4.1'
+        implementation 'com.google.android.material:material:1.6.0'
+        implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+        implementation 'net.sf.scuba:scuba-sc-android:0.0.20'
+        implementation 'com.google.code.gson:gson:2.8.7'
+        implementation 'com.google.guava:guava:24.1-jre'
+        implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+        androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+        implementation 'org.jmrtd:jmrtd:0.7.38'
+        implementation 'com.madgag.spongycastle:prov:1.58.0.0'
+        implementation 'com.github.mhshams:jnbis:1.1.0'
+        implementation(files("libs/vnidreader-library-1.0.1.aar"))
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+}
