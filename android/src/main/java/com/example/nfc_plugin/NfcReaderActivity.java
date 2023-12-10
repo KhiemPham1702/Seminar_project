@@ -20,9 +20,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.mobile_seminar_project.model.CardResult;
-import com.example.mobile_seminar_project.model.IDCardDetail;
-import com.example.mobile_seminar_project.model.ResultCode;
 
 import java.util.Arrays;
 import java.util.HashMap;
