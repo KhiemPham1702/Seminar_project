@@ -4,8 +4,8 @@ import android.nfc.tech.IsoDep;
 import android.util.Base64;
 import android.util.Log;
 
-import com.example.mobile_seminar_project.model.CardResult;
-import com.example.mobile_seminar_project.model.ResultCode;
+import com.example.nfc_plugin.model.CardResult;
+import com.example.nfc_plugin.model.ResultCode;
 import com.htc.sdk.eidparser.ICaoReaderParser;
 import com.htc.sdk.model.IDCardDetail;
 
@@ -25,7 +25,7 @@ public class IDCardReader {
     public Object readData(IsoDep isoDep, String cccdId, boolean hashCheck, boolean chipCheck, boolean activeCheck) {
         try {
             CardService cardService = CardService.getInstance(isoDep);
-            return (new ICaoReaderParser()).readData(com.htc.sdk.scuba.smartcards.CardService.getInstance(cardService), cccdId, hashCheck, chipCheck, activeCheck);
+            return (new ICaoReaderParser()).readData(com.htc.sdk.scuba.smartcards.CardService.getInstance(CardService.getInstance(cardService)), cccdId, hashCheck, chipCheck, activeCheck);
         } catch (Exception var7) {
             var7.printStackTrace();
             Log.e(TAG, "Error", var7);

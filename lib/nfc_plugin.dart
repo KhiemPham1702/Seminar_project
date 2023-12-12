@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:logger/logger.dart';
 
 import 'nfc_plugin_platform_interface.dart';
 
@@ -23,8 +22,8 @@ class NfcPlugin {
       };
       return await platformChannel.invokeMethod('sendDataToNative', data);
     } on PlatformException catch (e) {
-      var logger = Logger();
-      logger.e("Error: ${e.message}");
+      // var logger = Logger();
+      // logger.e("Error: ${e.message}");
       return null;
     }
   }

@@ -1,5 +1,11 @@
 package com.example.nfc_plugin;
 
+import static com.example.nfc_plugin.model.ResultCode.CANNOT_OPEN_DEVICE;
+import static com.example.nfc_plugin.model.ResultCode.CARD_LOST_CONNECTION;
+import static com.example.nfc_plugin.model.ResultCode.CARD_NOT_FOUND;
+import static com.example.nfc_plugin.model.ResultCode.UNKNOWN;
+import static com.example.nfc_plugin.model.ResultCode.WRONG_CCCDID;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +26,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
+
+import com.example.nfc_plugin.model.CardResult;
+import com.example.nfc_plugin.model.ResultCode;
 
 import java.util.Arrays;
 import java.util.HashMap;

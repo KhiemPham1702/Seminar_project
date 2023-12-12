@@ -2,7 +2,7 @@ package com.example.nfc_plugin;
 
 import android.graphics.Bitmap;
 
-import com.example.mobile_seminar_project.model.CardResult;
+import com.example.nfc_plugin.model.CardResult;
 
 
 public class ClientScanInfo {
