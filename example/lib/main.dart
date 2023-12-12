@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:nfc_plugin/nfc_plugin.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -16,35 +16,57 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _nfcPlugin = NfcPlugin();
+  String nfcData =
+      'Press Scan button and place the card in the scanning position';
+  String dialogText = 'Scanning...(Hold the card in the scanning position)';
 
-  @override
+  bool isScanning = false;
+
+  String textFieldValue1 = '';
+  String textFieldValue2 = '';
+  String textFieldValue3 = '';
+
+  String successMessage = '';
+  Map<Object?, Object?>? successResult;
+  String errorText = '';
+  Image? imageAvatar;
+
   void initState() {
     super.initState();
-    initPlatformState();
+    textFieldValue1 = '066202014790';
+    textFieldValue2 = '020217';
+    textFieldValue3 = '270217';
+    NfcPlugin.nfcProgressChannel
+        .receiveBroadcastStream()
+        .listen((dynamic event) {
+      setState(() {
+        dialogText = event;
+        if (Navigator.of(context).canPop()) {
+          // Nếu hộp thoại đang hiển thị, cập nhật nội dung của nó
+          Navigator.of(context).pop();
+          showNfcDialog(context);
+        }
+      });
+    });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _nfcPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+  void showNfcDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(dialogText),
+              SizedBox(height: 16),
+              CircularProgressIndicator(),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -55,7 +77,74 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Thêm 3 text input
+              TextField(
+                onChanged: (value) {
+                  textFieldValue1 = value;
+                },
+                controller: TextEditingController(text: textFieldValue1),
+              ),
+
+              TextField(
+                onChanged: (value) {
+                  textFieldValue2 = value;
+                },
+                controller: TextEditingController(text: textFieldValue2),
+              ),
+
+              TextField(
+                onChanged: (value) {
+                  textFieldValue3 = value;
+                },
+                controller: TextEditingController(text: textFieldValue3),
+              ),
+
+              ElevatedButton(
+                onPressed: () async {
+                  setState(() {
+                    successMessage = '';
+                    imageAvatar = null;
+                    nfcData = '';
+                    dialogText =
+                        'Scanning...(Hold the card in the scanning position)';
+                  });
+                  showNfcDialog(context);
+                  NfcPlugin plugin = NfcPlugin();
+                  Map<dynamic, dynamic>? re = await plugin.sendDataToNative(
+                      textFieldValue1, textFieldValue2, textFieldValue3);
+                  Navigator.of(context).pop();
+                  if (re != null) {
+                    setState(() {
+                      successResult = re['nfcResult'];
+                      successResult?.forEach((key, value) {
+                        successMessage += '$key: $value\n';
+                      });
+
+                      Uint8List? bytes = re['photo'];
+                      if (bytes != null) {
+                        imageAvatar = Image.memory(bytes);
+                      } else {
+                        imageAvatar = null;
+                      }
+                    });
+                  }
+                },
+                child: Text('NFC Scans'),
+              ),
+
+              // Hiển thị dữ liệu NFC
+              if (imageAvatar != null)
+                Container(
+                  width: 200, // Đặt chiều rộng của ảnh
+                  height: 200, // Đặt chiều cao của ảnh
+                  child: imageAvatar!,
+                ),
+              Text('${successMessage != '' ? successMessage : nfcData}\n'),
+            ],
+          ),
         ),
       ),
     );
