@@ -16,6 +16,10 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'libs'
+            dirs project(':nfc_plugin').file('libs')
+        }
     }
 }
 
@@ -26,7 +30,7 @@ android {
         namespace 'com.example.nfc_plugin'
     }
 
-    compileSdkVersion 33
+    compileSdkVersion 31
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -34,7 +38,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 26
+        minSdkVersion 20
     }
 
     dependencies {
@@ -54,10 +58,12 @@ android {
         implementation 'org.jmrtd:jmrtd:0.7.38'
         implementation 'com.madgag.spongycastle:prov:1.58.0.0'
         implementation 'com.github.mhshams:jnbis:1.1.0'
-//        implementation (name: 'vnidreader-library-1.0.1', ext: 'aar')
-        implementation files('libs/vnidreader-library-1.0.1.aar')
-//        implementation 'com.htc.sdk:vnidreader-library:1.0.1'
+
+//        implementation fileTree(dir: 'libs', include: ['*.aar'])
+//        implementation(name:'vnidreader-library-1.0.1', ext:'aar')
+        implementation (name:"vnidreader-library-1.0.1",ext:"aar")
     }
+
 
     testOptions {
         unitTests.all {
