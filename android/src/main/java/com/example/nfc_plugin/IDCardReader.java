@@ -8,8 +8,8 @@ import com.example.nfc_plugin.model.CardResult;
 import com.example.nfc_plugin.model.ResultCode;
 import com.htc.sdk.eidparser.ICaoReaderParser;
 import com.htc.sdk.model.IDCardDetail;
+import com.htc.sdk.scuba.smartcards.CardService;
 
-import net.sf.scuba.smartcards.CardService;
 
 public class IDCardReader {
     private static final String TAG = IDCardReader.class.getSimpleName();
@@ -25,7 +25,7 @@ public class IDCardReader {
     public Object readData(IsoDep isoDep, String cccdId, boolean hashCheck, boolean chipCheck, boolean activeCheck) {
         try {
             CardService cardService = CardService.getInstance(isoDep);
-            return (new ICaoReaderParser()).readData(com.htc.sdk.scuba.smartcards.CardService.getInstance(CardService.getInstance(cardService)), cccdId, hashCheck, chipCheck, activeCheck);
+            return (new ICaoReaderParser()).readData(cardService, cccdId, hashCheck, chipCheck, activeCheck);
         } catch (Exception var7) {
             var7.printStackTrace();
             Log.e(TAG, "Error", var7);
