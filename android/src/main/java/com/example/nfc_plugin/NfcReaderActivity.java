@@ -28,6 +28,7 @@ import android.view.MenuItem;
 
 
 import com.example.nfc_plugin.model.CardResult;
+import com.example.nfc_plugin.model.IDCardDetail;
 import com.example.nfc_plugin.model.ResultCode;
 
 import java.util.Arrays;
@@ -194,7 +195,7 @@ public class NfcReaderActivity extends Activity {
             nfcCheckCallback = checkCallback;
         }
 
-        private com.htc.sdk.model.IDCardDetail citizenInfo = new com.htc.sdk.model.IDCardDetail();
+        private IDCardDetail citizenInfo = new IDCardDetail();
         CardResult mCardResult;
 
         @Override
@@ -218,7 +219,7 @@ public class NfcReaderActivity extends Activity {
                 mCardResult = (CardResult) rd.readData(isoDep, cccdId, true, true,true);
                 CardResult result = mCardResult;
                 if (result != null && (result.getCode() == ResultCode.SUCCESS || result.getCode() == ResultCode.SUCCESS_WITH_WARNING)) {
-                    citizenInfo = rd.parseCardDetail(result);
+                    citizenInfo = (IDCardDetail) rd.parseCardDetail(result);
                 }
                 else
                 {

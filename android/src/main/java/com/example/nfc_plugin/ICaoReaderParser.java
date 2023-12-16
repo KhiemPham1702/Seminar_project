@@ -12,16 +12,20 @@ import androidx.annotation.RequiresApi;
 import com.example.nfc_plugin.model.CardResult;
 import com.example.nfc_plugin.model.CheckingCode;
 
+
+import com.example.nfc_plugin.model.IDCardDetail;
 import com.example.nfc_plugin.model.ResultCode;
 
 
 import com.htc.sdk.eidparser.AccessKeySpec;
 import com.htc.sdk.eidparser.IdCardService;
 import com.htc.sdk.eidparser.JMRTDSecurityProvider;
+import com.htc.sdk.eidparser.PACEKeySpec;
 import com.htc.sdk.eidparser.ext.DG13File;
 import com.htc.sdk.eidparser.ext.ImageUtil;
 import com.htc.sdk.eidparser.protocol.AAResult;
-import com.htc.sdk.model.IDCardDetail;
+
+
 import com.htc.sdk.scuba.smartcards.CardFileInputStream;
 import com.htc.sdk.scuba.smartcards.CardService;
 
@@ -30,7 +34,6 @@ import org.apache.commons.io.IOUtil;
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1Integer;
 import org.bouncycastle.asn1.DERSequence;
-import org.jmrtd.PACEKeySpec;
 import org.jmrtd.Util;
 import org.jmrtd.lds.ActiveAuthenticationInfo;
 import org.jmrtd.lds.CardAccessFile;
@@ -190,7 +193,9 @@ public class ICaoReaderParser {
                 case 13:
                     byte[] dg13Bytes = IOUtil.toByteArray(Data);
                     DG13File dgPersonDetailFile = new DG13File(dg13Bytes);
-                    this._citizenInfo = dgPersonDetailFile.readContent();
+                    com.htc.sdk.model.IDCardDetail citizenInfo = new com.htc.sdk.model.IDCardDetail();
+                    citizenInfo = dgPersonDetailFile.readContent();
+                    this._citizenInfo = new IDCardDetail(citizenInfo.getCitizenPid(), citizenInfo.getFullName(), citizenInfo.getBirthDate(), citizenInfo.getGender(), citizenInfo.getNationality(), citizenInfo.getEthnic(),citizenInfo.getReligion(), citizenInfo.getHomeTown(), citizenInfo.getRegPlaceAddress(), citizenInfo.getIdentifyCharacteristics(),citizenInfo.getDateProvide(),citizenInfo.getBirthDate(),citizenInfo.getFatherName(),citizenInfo.getMotherName(),citizenInfo.getWifeName(),citizenInfo.getHusBandName(),citizenInfo.getOldIdentify(),citizenInfo.getPhotoBase64(),citizenInfo.getPhoto());
                     if (this._faceBitmap != null) {
                         this._citizenInfo.setPhoto(this._faceBitmap);
                     }

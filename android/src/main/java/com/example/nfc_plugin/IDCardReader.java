@@ -5,9 +5,9 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.example.nfc_plugin.model.CardResult;
+
+import com.example.nfc_plugin.model.IDCardDetail;
 import com.example.nfc_plugin.model.ResultCode;
-import com.htc.sdk.eidparser.ICaoReaderParser;
-import com.htc.sdk.model.IDCardDetail;
 import com.htc.sdk.scuba.smartcards.CardService;
 
 
