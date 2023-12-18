@@ -84,9 +84,9 @@ class NfcIntroScreen extends GetWidget<NfcIntroController> {
 
   /// Navigates to the nfcInstructionScreen when the action is triggered.
   onTapNext() {
-    // Get.toNamed(
-    //   AppRoutes.nfcInstructionScreen,
-    // );
     controller.dataRe();
+    Get.toNamed(
+      AppRoutes.nfcInstructionScreen,
+    );
   }
 }

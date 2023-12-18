@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../core/app_export.dart';
 
 /// A collection of pre-defined text styles for customizing text appearance,
@@ -13,6 +14,7 @@ class CustomTextStyles {
   static get bodyLargeOnPrimary => theme.textTheme.bodyLarge!.copyWith(
         color: theme.colorScheme.onPrimary,
         fontWeight: FontWeight.w200,
+        fontSize: 15,
       );
   // Display text style
   static get displayMediumPinkA100 => theme.textTheme.displayMedium!.copyWith(

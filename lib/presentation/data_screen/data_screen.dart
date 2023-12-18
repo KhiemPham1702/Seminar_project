@@ -1,10 +1,11 @@
-import 'controller/data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:khim_s_application8/core/app_export.dart';
 import 'package:khim_s_application8/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:khim_s_application8/widgets/app_bar/custom_app_bar.dart';
 import 'package:khim_s_application8/widgets/custom_elevated_button.dart';
 import 'package:khim_s_application8/widgets/custom_text_form_field.dart';
+
+import 'controller/data_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class DataScreen extends GetWidget<DataController> {
@@ -21,11 +22,10 @@ class DataScreen extends GetWidget<DataController> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: _buildAppBar(),
-        body: Container(
-          width: double.maxFinite,
+        body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
             horizontal: 10.h,
-            vertical: 14.v,
+            vertical: 10.v,
           ),
           child: Column(
             children: [
@@ -57,8 +57,7 @@ class DataScreen extends GetWidget<DataController> {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.only(
-                    left: 19.h,
-                    right: 71.h,
+                    left: 10.h,
                   ),
                   child: Row(
                     children: [
@@ -160,6 +159,7 @@ class DataScreen extends GetWidget<DataController> {
     return CustomTextFormField(
       controller: controller.faceImageController,
       hintText: "lbl_face_image".tr,
+      autofocus: false,
     );
   }
 
@@ -168,6 +168,7 @@ class DataScreen extends GetWidget<DataController> {
     return CustomTextFormField(
       controller: controller.validityController,
       hintText: "lbl_validity".tr,
+      autofocus: false,
     );
   }
 
@@ -177,6 +178,7 @@ class DataScreen extends GetWidget<DataController> {
       controller: controller.personalInformationController,
       hintText: "msg_personal_information".tr,
       textInputAction: TextInputAction.done,
+      autofocus: false,
     );
   }
 
@@ -197,34 +199,42 @@ class DataScreen extends GetWidget<DataController> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Align(
-            alignment: Alignment.topCenter,
+          SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 _buildTwo(
-                  givenNames: "lbl_full_name".tr,
-                  pHUNGGIAKHIEM: "msg_pham_phung_gia".tr,
+                  type: "lbl_full_name".tr,
+                  value: "msg_pham_phung_gia".tr,
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
-                  givenNames: "lbl_given_names".tr,
-                  pHUNGGIAKHIEM: "lbl_phung_gia_khiem".tr,
+                  type: "lbl_given_names".tr,
+                  value: "lbl_phung_gia_khiem".tr,
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
-                  givenNames: "lbl_name".tr,
-                  pHUNGGIAKHIEM: "lbl_pham".tr,
+                  type: "lbl_name".tr,
+                  value: "lbl_pham".tr,
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
-                  givenNames: "lbl_gender".tr,
-                  pHUNGGIAKHIEM: "lbl_female".tr,
+                  type: "lbl_gender".tr,
+                  value: "lbl_female".tr,
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
-                  givenNames: "lbl_nationality".tr,
-                  pHUNGGIAKHIEM: "lbl_vietnamese".tr,
+                  type: "lbl_nationality".tr,
+                  value: "lbl_vietnamese".tr,
+                ),
+                SizedBox(height: 1.v),
+                _buildTwo(
+                  type: "Nationality".tr,
+                  value: "Viet Nam".tr,
+                ),
+                _buildTwo(
+                  type: "Date of birth".tr,
+                  value: "17/02/2002".tr,
                 ),
               ],
             ),
@@ -237,8 +247,8 @@ class DataScreen extends GetWidget<DataController> {
 
   /// Common widget
   Widget _buildTwo({
-    required String givenNames,
-    required String pHUNGGIAKHIEM,
+    required String type,
+    required String value,
   }) {
     return Container(
       padding: EdgeInsets.fromLTRB(14.h, 14.v, 14.h, 13.v),
@@ -249,7 +259,7 @@ class DataScreen extends GetWidget<DataController> {
           Padding(
             padding: EdgeInsets.only(bottom: 3.v),
             child: Text(
-              givenNames,
+              type,
               style: theme.textTheme.bodyLarge!.copyWith(
                 color: appTheme.black900,
               ),
@@ -261,7 +271,7 @@ class DataScreen extends GetWidget<DataController> {
               bottom: 3.v,
             ),
             child: Text(
-              pHUNGGIAKHIEM,
+              value,
               style: CustomTextStyles.bodyLargeExtraLight.copyWith(
                 color: appTheme.black900,
               ),
