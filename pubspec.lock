@@ -283,7 +283,7 @@ packages:
   nfc_plugin:
     dependency: "direct main"
     description:
-      path: ekyc_nfc
+      path: nfc_plugin
       relative: true
     source: path
     version: "0.0.1"

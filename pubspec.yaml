@@ -15,7 +15,7 @@ dependencies:
   flutter_mrz_scanner: ^2.1.0
   permission_handler: ^10.2.0
   nfc_plugin:
-    path: ./ekyc_nfc
+    path: ./nfc_plugin
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

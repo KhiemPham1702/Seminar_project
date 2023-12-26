@@ -36,17 +36,6 @@ class StartScreen extends GetWidget<StartController> {
                           textAlign: TextAlign.justify,
                           style: theme.textTheme.bodyLarge)),
                   Spacer(),
-                  Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.h),
-                      child: _buildFrameOne(
-                          settings: ImageConstant.imgInfo,
-                          settings1: "lbl_about".tr)),
-                  SizedBox(height: 3.v),
-                  Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.h),
-                      child: _buildFrameOne(
-                          settings: ImageConstant.imgSettings,
-                          settings1: "lbl_settings".tr))
                 ])),
             bottomNavigationBar: _buildGetStarted()));
   }

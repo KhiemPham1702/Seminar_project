@@ -16,6 +16,7 @@ class NfcIntroController extends GetxController {
   bool isLoading = false;
 
   Map<String, dynamic>? result;
+  Map<String, String>? dataNFC;
   String? dataMRZ = '';
   final DataController dataController = Get.put(DataController());
   PermissionStatus _permissionStatus = PermissionStatus.denied;
@@ -48,6 +49,11 @@ class NfcIntroController extends GetxController {
     print(
         "DATA=========================${convertToYYMMDD(result?['Expiry date'])}");
     print("DATA=========================${convertToCCCDFormat(result?['ID'])}");
+    dataNFC = {
+      'Birthdate': convertToYYMMDD(result?['Birthdate']),
+      'Expiry date': convertToYYMMDD(result?['Expiry date']),
+      'ID': convertToCCCDFormat(result?['ID'])
+    };
   }
 
   // Future<void> _scanMRZ() async {

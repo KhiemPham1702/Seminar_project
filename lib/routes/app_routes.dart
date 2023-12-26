@@ -83,9 +83,9 @@ class AppRoutes {
     ),
     GetPage(
       name: initialRoute,
-      page: () => DataScreen(),
+      page: () => StartScreen(),
       bindings: [
-        DataBinding(),
+        StartBinding(),
       ],
     ),
   ];

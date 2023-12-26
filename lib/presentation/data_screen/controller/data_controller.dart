@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:khim_s_application8/core/app_export.dart';
 import 'package:khim_s_application8/presentation/data_screen/models/data_model.dart';
-import 'package:flutter/material.dart';
 
 /// A controller class for the DataScreen.
 ///
@@ -14,6 +14,7 @@ class DataController extends GetxController {
   TextEditingController personalInformationController = TextEditingController();
 
   Rx<DataModel> dataModelObj = DataModel().obs;
+  Map<dynamic, dynamic>? reNFC;
 
   @override
   void onClose() {
@@ -21,5 +22,7 @@ class DataController extends GetxController {
     faceImageController.dispose();
     validityController.dispose();
     personalInformationController.dispose();
+    reNFC = Get.arguments;
+    print("NFC DATA: $reNFC");
   }
 }
