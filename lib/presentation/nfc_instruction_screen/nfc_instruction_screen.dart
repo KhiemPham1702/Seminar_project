@@ -27,7 +27,7 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(
             horizontal: 15.h,
-            vertical: 58.v,
+            vertical: 50.v,
           ),
           child: Column(
             children: [
@@ -35,7 +35,7 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
                 width: 400.h,
                 padding: EdgeInsets.symmetric(
                   horizontal: 19.h,
-                  vertical: 4.v,
+                  vertical: 0.v,
                 ),
                 decoration: AppDecoration.fillOnPrimaryContainer,
                 child: Text(
@@ -55,43 +55,50 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
                   style: theme.textTheme.bodyLarge,
                 ),
               ),
-              Container(
-                child: Image.asset('assets/images/nfc_check.gif'),
-                height: 400,
-                width: 400,
-              ),
               Obx(() {
                 if (controller.isNfcScanning.value) {
                   return _buildNfcScanningDialog();
                 } else {
-                  return Container(
-                    width: 366.h,
-                    margin: EdgeInsets.symmetric(horizontal: 17.h),
-                    child: Text(
-                      "msg_keep_the_phone_on".tr,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge,
-                    ),
+                  return Column(
+                    children: [
+                      Container(
+                        child: Image.asset('assets/images/nfc_check.gif'),
+                        height: 400,
+                        width: 400,
+                      ),
+                      Container(
+                        width: 366.h,
+                        margin: EdgeInsets.symmetric(horizontal: 17.h),
+                        child: Text(
+                          controller.instructionText.value,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodyLarge,
+                        ),
+                      ),
+                    ],
                   );
                 }
               }),
-              CustomElevatedButton(
-                  text: "SCAN".tr,
-                  margin: EdgeInsets.symmetric(horizontal: 10.h),
-                  onPressed: () {
-                    controller.onInit();
-                    startNfcScanning();
-                  }),
-              Spacer(
-                flex: 30,
-              ),
             ],
           ),
         ),
+        bottomNavigationBar: _buildNext(),
       ),
     );
+  }
+
+  Widget _buildNext() {
+    return CustomElevatedButton(
+        text: "Start Scan CCCD".tr,
+        margin: EdgeInsets.only(left: 25.h, right: 25.h, bottom: 42.v),
+        onPressed: () {
+          controller.instructionText.value =
+              "Place the card in the scanning area";
+          controller.onInit();
+          startNfcScanning();
+        });
   }
 
   void startNfcScanning() async {
@@ -101,8 +108,11 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
           controller.result?['ID'],
           controller.result?['Birthdate'],
           controller.result?['Expiry date']);
-      if (re != null) {
-        Get.toNamed(AppRoutes.dataScreen, arguments: re);
+      if (re?['photo'] != null) {
+        showSuccessDialog("Scan NFC success", re);
+      } else {
+        controller.instructionText.value = "msg_keep_the_phone_on".tr;
+        showErrorDialog("Scan false. Please try again.");
       }
     } catch (e) {
     } finally {
@@ -110,15 +120,83 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
     }
   }
 
+  void showErrorDialog(String successMessage) {
+    Get.defaultDialog(
+      title: 'Success',
+      content: Column(
+        children: [
+          Icon(
+            Icons.error_outlined,
+            color: Colors.red,
+            size: 50,
+          ),
+          SizedBox(height: 10),
+          Text(
+            successMessage,
+            style: TextStyle(color: Colors.red),
+          ),
+        ],
+      ),
+      barrierDismissible: false,
+      textConfirm: 'OK',
+      buttonColor: Color.fromRGBO(147, 118, 224, 1),
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.back();
+      },
+    );
+  }
+
+  void showSuccessDialog(String successMessage, Map<dynamic, dynamic>? re) {
+    Get.defaultDialog(
+      title: 'Success',
+      content: Column(
+        children: [
+          Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 50,
+          ),
+          SizedBox(height: 10),
+          Text(
+            successMessage,
+            style: TextStyle(color: Colors.green),
+          ),
+        ],
+      ),
+      barrierDismissible: false,
+      textConfirm: 'OK',
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.toNamed(AppRoutes.dataScreen, arguments: re);
+      },
+    );
+  }
+
   Widget _buildNfcScanningDialog() {
     startNfcScanning();
-    return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
+    return Align(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircularProgressIndicator(),
-          SizedBox(height: 16),
-          Text("Quét NFC đang diễn ra..."),
+          SizedBox(height: 300.v),
+          Text(
+            "Hold the CCCD card steady",
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyLarge,
+          ),
+          SizedBox(height: 12.v),
+          Text(
+            "Scanning...",
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyLarge,
+          ),
+          SizedBox(height: 12.v),
+          LinearProgressIndicator(),
         ],
       ),
     );

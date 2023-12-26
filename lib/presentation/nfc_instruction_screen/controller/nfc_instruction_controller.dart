@@ -10,14 +10,16 @@ class NfcInstructionController extends GetxController {
   Rx<NfcInstructionModel> nfcInstructionModelObj = NfcInstructionModel().obs;
   Map<String, dynamic>? result;
   RxBool isNfcScanning = false.obs;
+  RxBool isReady = false.obs;
+  var instructionText = "msg_keep_the_phone_on".tr.obs;
   @override
   void onInit() {
     super.onInit();
+    isReady.value = true;
     NfcPlugin.nfcProgressChannel
         .receiveBroadcastStream()
         .listen((dynamic event) {
       isNfcScanning.value = true;
-      print("ISCANNING:${isNfcScanning.value}");
     });
   }
 }
