@@ -168,6 +168,7 @@ class NfcInstructionScreen extends GetWidget<NfcInstructionController> {
       textConfirm: 'OK',
       confirmTextColor: Colors.white,
       onConfirm: () {
+        Get.back();
         Get.toNamed(AppRoutes.dataScreen, arguments: re);
       },
     );

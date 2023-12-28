@@ -15,6 +15,7 @@ class DataController extends GetxController {
 
   Rx<DataModel> dataModelObj = DataModel().obs;
   Map<dynamic, dynamic>? reNFC;
+  Image? image;
 
   @override
   void onClose() {
@@ -22,7 +23,20 @@ class DataController extends GetxController {
     faceImageController.dispose();
     validityController.dispose();
     personalInformationController.dispose();
-    reNFC = Get.arguments;
-    print("NFC DATA: $reNFC");
+  }
+
+  String convertDateFormat(String inputDate) {
+    List<String> dateParts = inputDate.split('/');
+    int day = int.parse(dateParts[0]);
+    int month = int.parse(dateParts[1]);
+    int year = int.parse(dateParts[2]);
+
+    DateTime newDate = DateTime(year + 25, month, day);
+
+    String formattedDate = '${newDate.day.toString().padLeft(2, '0')}/'
+        '${newDate.month.toString().padLeft(2, '0')}/'
+        '${newDate.year.toString()}';
+
+    return formattedDate;
   }
 }

@@ -24,6 +24,7 @@ flutter:
   assets: 
     - assets/
     - assets/images/
+    - assets/images/NFC.jpg
   fonts: 
     - family: Public Sans
       fonts: 
@@ -37,3 +38,7 @@ flutter:
           weight: 300
         - asset: assets/fonts/PublicSansExtraLight.ttf
           weight: 200
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/NFC.jpg"

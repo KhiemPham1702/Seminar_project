@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:khim_s_application8/core/app_export.dart';
 import 'package:khim_s_application8/widgets/app_bar/custom_app_bar.dart';
@@ -16,7 +18,15 @@ class DataScreen extends GetWidget<DataController> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-
+    controller.reNFC = Get.arguments;
+    print("DATA NFC---------------------------");
+    print(controller.reNFC);
+    Uint8List? bytes = controller.reNFC?['photo'];
+    if (bytes != null) {
+      controller.image = Image.memory(bytes);
+    } else {
+      controller.image = null;
+    }
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -44,11 +54,17 @@ class DataScreen extends GetWidget<DataController> {
                 SizedBox(height: 63.v),
                 _buildFaceImage(),
                 SizedBox(height: 9.v),
-                Image.asset(
-                  ImageConstant.imgRectangle9,
-                  height: 150,
-                  width: 200,
-                ),
+                controller.image == null
+                    ? Image.asset(
+                        ImageConstant.imgRectangle9,
+                        height: 150,
+                        width: 200,
+                      )
+                    : Container(
+                        height: 150,
+                        width: 200,
+                        child: controller.image,
+                      ),
                 SizedBox(height: 9.v),
                 _buildValidity(),
                 SizedBox(height: 14.v),
@@ -89,64 +105,73 @@ class DataScreen extends GetWidget<DataController> {
                 SizedBox(height: 8.v),
                 _buildTwo(
                   type: "ID".tr,
-                  value: "msg_pham_phung_gia".tr,
+                  value: controller.reNFC?['nfcResult']['Số CCCD'],
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
                   type: "lbl_full_name".tr,
-                  value: "lbl_phung_gia_khiem".tr,
+                  value: controller.reNFC?['nfcResult']['Họ tên'],
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Birthday".tr,
-                  value: "lbl_pham".tr,
+                  value: controller.reNFC?['nfcResult']['Ngày sinh'],
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
                   type: "lbl_gender".tr,
-                  value: "lbl_female".tr,
+                  value: controller.reNFC?['nfcResult']['Giới tính'],
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Issue Date".tr,
-                  value: "lbl_vietnamese".tr,
+                  value: controller.reNFC?['nfcResult']['Ngày cấp'],
                 ),
                 SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Expiry Date".tr,
-                  value: "Viet Nam".tr,
+                  value: controller.convertDateFormat(
+                      controller.reNFC?['nfcResult']['Ngày hết hạn']),
                 ),
+                SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Ethnic".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Dân tộc'],
                 ),
+                SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Nationality".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Quốc tịch'],
                 ),
+                SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Religion".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Tôn giáo'],
                 ),
-                _buildTwo(
+                SizedBox(height: 1.v),
+                _buildThree(
                   type: "HomeTown".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Quê quán'],
                 ),
-                _buildTwo(
+                SizedBox(height: 1.v),
+                _buildThree(
                   type: "Address".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Địa chỉ'],
                 ),
-                _buildTwo(
+                SizedBox(height: 1.v),
+                _buildThree(
                   type: "Identify Characteristics".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Đặc điểm nhận dạng'],
                 ),
+                SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Father Name".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Tên Cha'],
                 ),
+                SizedBox(height: 1.v),
                 _buildTwo(
                   type: "Mother Name".tr,
-                  value: "17/02/2002".tr,
+                  value: controller.reNFC?['nfcResult']['Tên mẹ'],
                 ),
                 SizedBox(height: 23.v),
                 _buildFinish(),
@@ -215,6 +240,7 @@ class DataScreen extends GetWidget<DataController> {
       width: 380.h,
       text: "lbl_finish".tr,
       alignment: Alignment.bottomCenter,
+      onPressed: () => Get.toNamed(AppRoutes.startScreen),
     );
   }
 
@@ -235,6 +261,7 @@ class DataScreen extends GetWidget<DataController> {
               type,
               style: theme.textTheme.bodyLarge!.copyWith(
                 color: appTheme.black900,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -245,6 +272,46 @@ class DataScreen extends GetWidget<DataController> {
             ),
             child: Text(
               value,
+              overflow: TextOverflow.ellipsis,
+              style: CustomTextStyles.bodyLargeExtraLight.copyWith(
+                color: appTheme.black900,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildThree({
+    required String type,
+    required String value,
+  }) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(14.h, 14.v, 14.h, 13.v),
+      decoration: AppDecoration.outlineSecondaryContainer,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 3.v),
+            child: Text(
+              type,
+              style: theme.textTheme.bodyLarge!.copyWith(
+                color: appTheme.black900,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              bottom: 3.v,
+            ),
+            child: Text(
+              value,
+              maxLines: 3,
+              overflow: TextOverflow.visible,
               style: CustomTextStyles.bodyLargeExtraLight.copyWith(
                 color: appTheme.black900,
               ),

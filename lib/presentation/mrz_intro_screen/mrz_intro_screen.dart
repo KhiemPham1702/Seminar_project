@@ -11,6 +11,7 @@ class MrzIntroScreen extends GetWidget<MrzIntroController> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
+    controller.requestCameraPermission();
     return SafeArea(
         child: Scaffold(
             appBar: _buildAppBar(),

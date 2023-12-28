@@ -13,6 +13,11 @@ class _CameraPageState extends State<CameraPage> {
   bool isFlashlightOn = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(alignment: Alignment.center, children: [
