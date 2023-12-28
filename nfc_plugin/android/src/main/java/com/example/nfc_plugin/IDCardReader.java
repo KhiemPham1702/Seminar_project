@@ -17,11 +17,6 @@ public class IDCardReader {
     public IDCardReader() {
     }
 
-
-//    public com.htc.sdk.model.CardResult readData(CardService card, String cccdId, boolean hashCheck, boolean chipCheck, boolean activeCheck) {
-//        return (new ICaoReaderParser()).readData(com.htc.sdk.scuba.smartcards.CardService.getInstance(card), cccdId, hashCheck, chipCheck, activeCheck);
-//    }
-
     public Object readData(IsoDep isoDep, String cccdId, boolean hashCheck, boolean chipCheck, boolean activeCheck) {
         try {
             CardService cardService = CardService.getInstance(isoDep);
