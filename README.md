@@ -1,27 +1,31 @@
 
-# khim_s_application8
-### Table of contents
-- [System requirements](#system-requirements)
-- [Figma design guidelines for better UI accuracy](#figma-design-guideline-for-better-accuracy)
-- [Check the UI of the entire app](#app-navigations)
-- [Application structure](#project-structure)
-- [How to format your code?](#how-you-can-do-code-formatting)
-- [How you can improve code readability?](#how-you-can-improve-the-readability-of-code)
-- [Libraries and tools used](#libraries-and-tools-used)
-- [Support](#support)
+# eKYC with NFC (Base on ReadID Ready - epassportnfc plugin)
+
+### Author
+
+Group 13<br>
+Pham Phung Gia khiem - 20521459 - 2052159@gm.uit.edu.vn<br>
+Lu Dinh Long - 20521565 - 20521565@gm.uit.edu.vn
+
+### Project Name
+
+eKYC with NFC
 
 ### System requirements
 
-Dart SDK Version 2.18.0 or greater.
+Dart SDK Version 2.18.0 or greater.<br>
 Flutter SDK Version 3.3.0 or greater.
+
+### To run project
+
+Run command "flutter pub get" to import all the packages in pubspec.yaml<br>
+Run command "flutter run" in terminal at path on file source of project to run project
 
 ### Check the UI of the entire app
 
 Check the UI of all the app screens from a single place by setting up the 'initialRoute'  to AppNavigation in the AppRoutes.dart file.
 
 ### Application structure
-
-After successful build, your application structure should look like this:
 
 ```
 .
@@ -47,13 +51,6 @@ After successful build, your application structure should look like this:
     └── widgets                     - It contains all custom widget classes
 ```
 
-### How to format your code?
-
-- if your code is not formatted then run following command in your terminal to format code
-  ```
-  dart format .
-  ```
-
 ### Libraries and tools used
 
 - get - State management
@@ -64,3 +61,9 @@ After successful build, your application structure should look like this:
   https://pub.dev/packages/shared_preferences
 - cached_network_image - For storing internet image into cache
   https://pub.dev/packages/cached_network_image
+- epassportnfc - Provides information about NFC
+  https://pub.dev/packages/epassportnfc
+- ReadID Me - Provides information about NFC
+  https://play.google.com/store/apps/details?id=nl.innovalor.nfciddocshowcase&hl=vi&gl=US
+
+
