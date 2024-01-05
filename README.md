@@ -66,4 +66,5 @@ Check the UI of all the app screens from a single place by setting up the 'initi
 - ReadID Me - Provides information about NFC
   https://play.google.com/store/apps/details?id=nl.innovalor.nfciddocshowcase&hl=vi&gl=US
 
-
+### Github link
+https://github.com/KhiemPham1702/Seminar_project
