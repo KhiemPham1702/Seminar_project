@@ -169,8 +169,6 @@ public class NfcReaderActivity extends Activity {
     }
 
     private void setNfcUiState(int state, String message) {
-//        TextView txt_v = (TextView) findViewById(R.id.lbl_nfc_status);
-//        txt_v.setText(message);
     }
 
     @Override

@@ -39,19 +39,4 @@ public class IDCardReader {
             return (new ICaoReaderParser()).parseFromBytes(allData);
         }
     }
-
-    private String padLeftZeros(String inputString, int length) {
-        if (inputString.length() >= length) {
-            return inputString;
-        } else {
-            StringBuilder sb = new StringBuilder();
-
-            while(sb.length() < length - inputString.length()) {
-                sb.append('0');
-            }
-
-            sb.append(inputString);
-            return sb.toString();
-        }
-    }
 }
